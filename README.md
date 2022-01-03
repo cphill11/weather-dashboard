@@ -27,4 +27,4 @@ Clicking on a city in search history returns the user to the current and future 
 
 
 # Made By:
-Criste Phillips# weather-dashboard
+Criste Phillips
