@@ -146,6 +146,7 @@
     background-color: var(--dark);
     padding: 2.5%;
     border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+    text-align: center;
   }
   
   .card-body {

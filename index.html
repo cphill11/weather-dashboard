@@ -26,19 +26,126 @@
 <body class="flex-column min-100-vh">
     <header class="hero" class="container-fluid">
         <h1 class="app-title">Weather Dashboard</h1>
-        <!-- Weather Dashboard heading here, not interactive, blude with white letters -->
+        <!-- Weather Dashboard heading here needs to have fade -->
        
     </header>
     
-    <main class="container">
-        <div class="row">
-            <div class="col-md-3">Search Section</div>
-        <!-- left side is 1/4 of page, has a search field and shows search results below it-->
-            <div class="col-mod-9">Results Section</div>
+    <main class="flex-row justify-space-between">
+        <div class="col-12 col-md-4">
+          <div class="card">
+            <h1 class="card-header">Search for a City</h1>
+            <form id="user-form" class="card-body">
+                <!-- input name and id="" changed from username to "city"-->
+              <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+              <button type="submit" class="btn">Search</button>
+                <section class="ajax-section">
+                    <div class="container">
+                        <ul class="cities"></ul>
+                    </div>
+                </section>
+            </form>
+          </div>
+            <!-- placeholder, results will need to show in this spot-->
+            <div class="card">
+                <h2 class="card-header">Recent Searches</h2>
+            </div>
         </div>
-        
-       
-        <!-- right side is 3/4 of page, divided into one large block, with 5 smaller blocks below it-->
+
+    <!-- right side is 3/4 of page, divided into one large block, with 5 smaller blocks below it-->
+      
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <h3 class="card-header">Current City</h3>
+                    <li class="city">
+                        <h2 class="city-name" data-name="...">
+                            <span>...</span>
+                            <sup>...</sup>
+                        </h2>
+                        <span class="city-temp">...<sup>°C</sup></span>
+                        <figure>
+                            <img class="city-icon" src="..." alt="...">
+                            <figcaption>...</figcaption>
+                        </figure>
+                    </li>
+            </div>
+            <div class="card">
+                <!-- break into 5 separate sections -->
+                <h3 class="card-header">5-Day Forecast:</h3>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">Day 1 Placeholder>
+                            <li class="city">
+                                <h2 class="city-name" data-name="...">
+                                    <span>...</span>
+                                    <sup>...</sup>
+                                </h2>
+                                <span class="city-temp">...<sup>°C</sup></span>
+                                <figure>
+                                    <img class="city-icon" src="..." alt="...">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </li>
+                        </div>
+                        <div class="col-sm">Day 2 Placeholder>
+                            <li class="city">
+                                <h2 class="city-name" data-name="...">
+                                    <span>...</span>
+                                    <sup>...</sup>
+                                </h2>
+                                <span class="city-temp">...<sup>°C</sup></span>
+                                <figure>
+                                    <img class="city-icon" src="..." alt="...">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </li>
+                        </div>
+
+                        <div class="col-sm">Day 3 Placeholder>
+                            <li class="city">
+                                <h2 class="city-name" data-name="...">
+                                    <span>...</span>
+                                    <sup>...</sup>
+                                </h2>
+                                <span class="city-temp">...<sup>°C</sup></span>
+                                <figure>
+                                    <img class="city-icon" src="..." alt="...">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </li>
+                        </div>
+
+                        <div class="col-sm">Day 4 Placeholder>
+                            <li class="city">
+                                <h2 class="city-name" data-name="...">
+                                    <span>...</span>
+                                    <sup>...</sup>
+                                </h2>
+                                <span class="city-temp">...<sup>°C</sup></span>
+                                <figure>
+                                    <img class="city-icon" src="..." alt="...">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </li>
+                        </div>
+                        <div class="col-sm">Day 5 Placeholder>
+                            <li class="city">
+                                <h2 class="city-name" data-name="...">
+                                    <span>...</span>
+                                    <sup>...</sup>
+                                </h2>
+                                <span class="city-temp">...<sup>°C</sup></span>
+                                <figure>
+                                    <img class="city-icon" src="..." alt="...">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </li>
+                        </div>
+                </div>
+            </div>
+        </div> 
+   
+      
       
              
     </main>
