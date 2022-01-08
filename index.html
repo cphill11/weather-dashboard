@@ -31,24 +31,7 @@
     
 
 
-<!--   Code from the website that I didn't use 
-AJAX = Asynchronous JavaScript & XML, allows for accessing web servers from a web page
 
-    <section class="top-banner">
-  <div class="container">
-    <h1 class="heading">Simple Weather App</h1>
-    <form>
-      <input type="text" placeholder="Search for a city" autofocus>
-      <button type="submit">SUBMIT</button>
-      <span class="msg"></span>
-    </form>
-  </div>
-</section>
-<section class="ajax-section">
-  <div class="container">
-    <ul class="cities"></ul>
-  </div>
-</section>  -->
 
 
     <main class="flex-row justify-space-between">
@@ -61,10 +44,12 @@ AJAX = Asynchronous JavaScript & XML, allows for accessing web servers from a we
               <button type="submit" class="btn">Search</button>
             </form>
           </div>
+
+
             <!-- placeholder, results will need to show in this spot-->
-            <div class="card">
-                <h2 class="card-header">Recent Searches</h2>
-            </div>
+            <div class="card" id="recent-searches">
+
+            </div><br><br>
         </div>
 
     <!-- right side is 3/4 of page, divided into one large block, with 5 smaller blocks below it-->
@@ -73,92 +58,99 @@ AJAX = Asynchronous JavaScript & XML, allows for accessing web servers from a we
             <section class="ajax-section">
                 <div class="container">
                     <ul class="cities">
+
             <div class="card">
                 <h3 class="card-header">Current City</h3>
-                    <li class="city">
+                    <div class="city" id="day-current">
                         <h2 class="city-name" data-name="...">
-                            <span>...</span>
-                            <sup>...</sup>
+                            <div id="city-title-current"></div>
                         </h2>
-                        <span class="city-temp">...<sup>°C</sup></span>
+                        
+                        <div id="city-temp-current">...<sup>°F</sup></div>
+                        <div id="city-wind-current"></div>
+                        <div id="city-humidity-current"></div>
+                        <div id="city-uv-index-current"></div>
+
                         <figure>
-                           <!-- <img class="city-icon" src="..." alt="..."> -->
+                          <img id="city-icon-current" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
                             <figcaption>...</figcaption>
                         </figure>
-                    </li>
+                    </div>
             </div>
             <div class="card">
                 <!-- break into 5 separate sections -->
                 <h3 class="card-header">5-Day Forecast:</h3>
                 
+
+
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm">Day 1 Placeholder
-                            <li class="city">
-                                <h2 class="city-name" data-name="...">
-                                    <span>...</span>
-                                    <sup>...</sup>
-                                </h2>
-                                <span class="city-temp">...<sup>°C</sup></span>
+                        <div class="col-sm">Day 1 
+                            <div class="city" id="day-0">
+                                <h5><div id="city-date-0"></div></h5>
+                               
+                                <div id="city-temp-0">...<sup>°F</sup></div>
+                                <div id="city-wind-0"></div>
+                                <div id="city-humidity-0"></div>
                                 <figure>
-                                     <!-- <img class="city-icon" src="..." alt="..."> -->
+                                    <img id="city-icon-0" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
                                     <figcaption>...</figcaption>
                                 </figure>
-                            </li>
+                            </div>
                         </div>
-                        <div class="col-sm">Day 2 Placeholder
-                            <li class="city">
-                                <h2 class="city-name" data-name="...">
-                                    <span>...</span>
-                                    <sup>...</sup>
-                                </h2>
-                                <span class="city-temp">...<sup>°C</sup></span>
+                        <div class="col-sm">Day 2
+                            <div class="city" id="day-1">
+                                <h5><div id="city-date-1"></div></h5>
+                               
+                                <div id="city-temp-1">...<sup>°F</sup></div>
+                                <div id="city-wind-1"></div>
+                                <div id="city-humidity-1"></div>
                                 <figure>
-                                      <!-- <img class="city-icon" src="..." alt="..."> -->
+                                    <img id="city-icon-1" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
                                     <figcaption>...</figcaption>
                                 </figure>
-                            </li>
-                        </div>
-
-                        <div class="col-sm">Day 3 Placeholder
-                            <li class="city">
-                                <h2 class="city-name" data-name="...">
-                                    <span>...</span>
-                                    <sup>...</sup>
-                                </h2>
-                                <span class="city-temp">...<sup>°C</sup></span>
-                                <figure>
-                                      <!-- <img class="city-icon" src="..." alt="..."> -->
-                                    <figcaption>...</figcaption>
-                                </figure>
-                            </li>
+                            </div >
                         </div>
 
-                        <div class="col-sm">Day 4 Placeholder
-                            <li class="city">
-                                <h2 class="city-name" data-name="...">
-                                    <span>...</span>
-                                    <sup>...</sup>
-                                </h2>
-                                <span class="city-temp">...<sup>°C</sup></span>
+                        <div class="col-sm">Day 3 
+                            <div class="city" id="day-2">
+                                <h5><div id="city-date-2"></div></h5>
+                               
+                                <div id="city-temp-2">...<sup>°F</sup></div>
+                                <div id="city-wind-2"></div>
+                                <div id="city-humidity-2"></div>
                                 <figure>
-                                     <!-- <img class="city-icon" src="..." alt="..."> -->
+                                    <img id="city-icon-2" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
                                     <figcaption>...</figcaption>
                                 </figure>
-                            </li>
+                            </div>
                         </div>
-                        <div class="col-sm">Day 5 Placeholder
-                            <li class="city">
-                                <h2 class="city-name" data-name="...">
-                                    <span>...</span>
-                                    <sup>...</sup>
-                                </h2>
-                                <span class="city-temp">...<sup>°C</sup></span>
+
+                        <div class="col-sm">Day 4 
+                            <div class="city" id="day-3">
+                                <h5><div id="city-date-3"></div></h5>
+                               
+                                <div id="city-temp-3">...<sup>°F</sup></div>
+                                <div id="city-wind-3"></div>
+                                <div id="city-humidity-3"></div>
                                 <figure>
-                                      <!-- <img class="city-icon" src="..." alt="..."> -->
+                                    <img id="city-icon-3" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
                                     <figcaption>...</figcaption>
                                 </figure>
-                            </li>
+                            </div >
+                        </div>
+                        <div class="col-sm">Day 5 
+                            <div class="city" id="day-4">
+                                <h5><div id="city-date-4"></div></h5>
+                               
+                                <div id="city-temp-4">...<sup>°F</sup></div>
+                                <div id="city-wind-4"></div>
+                                <div id="city-humidity-4"></div>
+                                <figure>
+                                    <img id="city-icon-4" class="city-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=" alt="weather icon">
+                                    <figcaption>...</figcaption>
+                                </figure>
+                            </div>
                         </div>
                 </div>
             </div>

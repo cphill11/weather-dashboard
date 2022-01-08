@@ -1,140 +1,127 @@
-// how do I connect this to my index as I didn't use their same code?  Starting code used ".top-banner form", not "#.user-form"
-
 const form = document.querySelector("#user-form");
 const input = document.querySelector("#city");
+const localStoreKey = "weatherApp";
+
+// create & initialize empty object for local storage; It is a common practice to declare objects with the const keyword. uses JS object literal  https://www.w3schools.com/js/js_object_definition.asp
+// this is set up to prep for local storage
+var storageObject = {};
+
 
 // connect to API
 form.addEventListener("submit", e => {
   e.preventDefault();
-  const inputVal = input.value;
-  const apiKey = "7f1282b41e2802ede9b0c2a45ab85720";
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${apiKey}&units=metric`;
+  const inputVal = input.value||"north royalton";
+  const apiKey = "5fdc5c82d91fcc6b7408351d973910b5";
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${apiKey}&units=imperial`;
+  const encoded = encodeURI(url);
   console.log(url);
-  
-  fetch(url).then(response => response.json()).then(data => {
+  console.log(encoded);
+ 
+  //becuase the service returns in 3 hour increments, we need to divide result by 5 to get the first value for each day - adjusted to display for 12pm
+  const dayFilter = [5,13,21,29,37];
+  fetch(encoded).then(response => response.json()).then(data => {
       // do stuff w/ data
-      const { main, name, sys, weather } = data;
-      const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]
-}@2x.png`;
+      console.log(data);
 
-    // build list item component
-    const li = document.createElement("li");
-        li.classList.add("city");
-    const markup = `
-      <h2 class="city-name" data-name="${name},${sys.country}">
-        <span>${name}</span>
-        <sup>${sys.country}</sup>
-      </h2>
-      <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup>
-      </div>
-      <figure>
-        <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>
-        <figcaption>${weather[0]["description"]}</figcaption>
-      </figure>
-    `;
-    li.innerHTML = markup;
-    list.appendChild(li);   
-      })
-      // to do later //
-          .catch(() => {
-            msg.textContext = "Please search for a valid city";
-      });
-    });
+      // if the cod key is not 200, input is invalid for search
+      if(data.cod !== null && data.cod !== '200'){
+        //earch error
+        window.alert(inputVal + ' is not a real city... please select a valid city');
+        Promise.resolve();
+        return;
+      }
 
-// connect to API
+    const filteredDataForStorage = [];
+      dayFilter.forEach(filter => filteredDataForStorage.push(data.list[filter]));
+      data.listFiltered = filteredDataForStorage;
 
+      // first store, then display data
+      storageObject[inputVal] = data;
+      console.log(storageObject); 
 
+      localStorage.setItem(localStoreKey, JSON.stringify(storageObject));
+  
+      // call next functions
+      displayForecastCurrentDay(data);
+      displayForecastFiveDay(data);
+      recentSearches();
+  });
+});
 
+const displayForecastCurrentDay = function(forecastData) {
+  // access span in Current City section; create variable for code simplification
 
+  var weatherChars = forecastData.listFiltered[0];
+  var date = new Date(weatherChars.dt_txt); 
+  var icon = `https://openweathermap.org/img/wn/${
+    weatherChars.weather[0]["icon"]
+  }@2x.png`;
 
-// add local storage  AFTER API!!!!
-//$(".btn").on("click", function() {
-//   var saveKey = $(this).parent().attr("id");
-//   var saveValue = $(this).siblings(".description").val();
-//   // saves items to storage
-//   localStorage.setItem(saveKey, saveValue);
-// });
-// // pull row info from localStorage and displays it in the description
-// $("#row-9 .description").val(localStorage.getItem("row-9"));
-// $("#row-10 .description").val(localStorage.getItem("row-10"));
-// $("#row-11 .description").val(localStorage.getItem("row-11"));
-// $("#row-12 .description").val(localStorage.getItem("row-12"));
-// $("#row-13 .description").val(localStorage.getItem("row-13"));
-// $("#row-14 .description").val(localStorage.getItem("row-14"));
-// $("#row-15 .description").val(localStorage.getItem("row-15"));
-// $("#row-16 .description").val(localStorage.getItem("row-16"));
-// $("#row-17 .description").val(localStorage.getItem("row-17"));
+  document.getElementById("city-title-current").innerHTML = forecastData.city.name + " (" + date.toLocaleDateString("en-US") + ")";
 
+  document.getElementById("city-temp-current").innerHTML = "temp: " + weatherChars.main.temp + " <sup>°F</sup> ";
 
-
-// // clear content of .msg element
-// msg.textContent = "";
-// form.reset();
-// input.focus();
-
-// JS is client side script
-// Start w/ Variables; variable format is--> var variable name = variable assignment notation to get HTML element
-// document refers to the HTML document that the javascript is linked to
-// .getElementByID is a built in JavaScript fxn on the document model to find an HTML element w/ the ID that matches
-//  https://www.w3schools.com/js/js_htmldom_document.asp
-
-
-/* Examples of variables to start with, b/c they will be referenced further in the document
-// Global variables that can be accessed w/in any other function or variable
-var htmlElementByID = document.getElementById('ID')
-
-var htmlElementClass = document.getElementsByClassName('Class-Name')  
-
-var htmlElementClass;  <-- this is null as nothing was applied to it
-*/
-
-
-
-//initialization of event handlers for named functions
-/* document.getElementById('ID').addEventListener('event-type', eventHandlerFunction);
-
-function init() {
-    document.getElementById('ID').addEventListener('event-type', eventHandlerFunction);
-    ... (probably more of these)
-}
-
-*/
-
-
-// named functions
-/* function utilityFxn(){
+  document.getElementById("city-wind-current").innerHTML = "wind: " + weatherChars.wind.speed + " MPH";
+  
+  document.getElementById("city-humidity-current").innerHTML = "humidity: " + weatherChars.main.humidity + "%";
+  
+  document.getElementById("city-icon-current").src= icon;
+  
+ // document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
 
 }
-*/
 
+const displayForecastFiveDay = function(forecastData) {
+  // access span in Current City section; create variable for code simplification
+  // loop 
+  for(var i=0; i < forecastData.listFiltered.length; i++) {
 
-// events
-/* named functions for eventHandlers 
-function eventHandler(){
-    /* method or function body
-    if / else statements
-    function logic
+  var weatherChars = forecastData.listFiltered[i];
+  var date = new Date(weatherChars.dt_txt); 
+  var icon = `http://openweathermap.org/img/wn/${
+    weatherChars.weather[0].icon
+  }@2x.png`;
+
+  
+    // use i to refer to index to streamline code
+  document.getElementById("city-date-" + i).innerHTML = date.toLocaleDateString("en-US");
+
+  document.getElementById("city-temp-" + i).innerHTML = "temp: " + weatherChars.main.temp + " <sup>°F</sup> ";
+
+  document.getElementById("city-wind-" + i).innerHTML = "wind: " + weatherChars.wind.speed + " MPH";
+  
+  document.getElementById("city-humidity-" + i).innerHTML = "humidity: " + weatherChars.main.humidity + "%";
+
+  document.getElementById("city-icon-" + i).src= icon;
+
+ // document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
+
+  }
 }
-*/
 
-// end with execute init
-/* 
-init();
-*/
+const recentSearches = function() {
+  var searches = JSON.parse(localStorage.getItem(localStoreKey));
 
+  // retrieving list of keys for each search done
+  var objectKeys = Object.keys(searches);
+  console.log(objectKeys);
 
-// JSON fetch (API) data example
-    // fetch(approrpriate repo).then(function(object-chosen)
-        //fetch("https://api.github.com/users/octocat/repos").then(function(response) {
-   
-    // object-chosen.method().then(function() 
-        // here the response object in the fetch logic has a json() method
-        //response.json().then(function(data) {
-        
-        //check console.log to see data
-            //console.log(data);
+  var searchHtml = "";
+  for(var i=0; i < objectKeys.length; i++) {
+    searchHtml += '<a href="#" onclick="onRecentSearchClick(this.id); return false;" id="' + objectKeys[i] + '" class="card-header search-click">' +objectKeys[i]+'</a>';
+  }  
 
-    //close fetch API logic
-    // });
-    // });
+  document.getElementById("recent-searches").innerHTML = searchHtml;
+}
 
+const onRecentSearchClick = function(id) {
+  const searchData = storageObject[id];
+  displayForecastCurrentDay(searchData);
+  displayForecastFiveDay(searchData);
+}
+
+// on init, check local storage for recent searches
+if(localStorage.getItem(localStoreKey) !== null){
+  storageObject = JSON.parse(localStorage.getItem(localStoreKey));
+  recentSearches();
+}
