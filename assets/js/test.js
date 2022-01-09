@@ -7,6 +7,8 @@ const localStoreKey = "weatherApp";
 var storageObject = {};
 
 
+// need event listener to trigger w/ each click on saved searches to populate current data
+
 // connect to API
 form.addEventListener("submit", e => {
   console.log("form-submitted");
