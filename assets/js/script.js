@@ -10,7 +10,7 @@ var storageObject = {};
 // connect to API
 form.addEventListener("submit", e => {
   e.preventDefault();
-  const inputVal = input.value||"north royalton";
+  const inputVal = input.value||"";
   const apiKey = "5fdc5c82d91fcc6b7408351d973910b5";
 
   // use https://openweathermap.org/api/one-call-api     will need to rebuild, use lon & latitude
@@ -23,7 +23,7 @@ form.addEventListener("submit", e => {
   console.log(url);
   console.log(encoded);
  
-  //becuase the service returns in 3 hour increments, we need to divide result by 5 to get the first value for each day - adjusted to display for 12pm
+  //because the service returns in 3 hour increments, we need to divide result by 5 to get the first value for each day - adjusted to display for 12pm
   const dayFilter = [5,13,21,29,37];
   fetch(encoded).then(response => response.json()).then(data => {
       // do stuff w/ data
@@ -36,6 +36,8 @@ form.addEventListener("submit", e => {
         Promise.resolve();
         return;
       }
+      // clears search box of input value
+    input.value = "";
 
     const filteredDataForStorage = [];
       dayFilter.forEach(filter => filteredDataForStorage.push(data.list[filter]));
@@ -55,27 +57,22 @@ form.addEventListener("submit", e => {
 });
 
 const displayForecastCurrentDay = function(forecastData) {
-  // access span in Current City section; create variable for code simplification
-
+  // access span in Current City section; created variable for code simplification
   var weatherChars = forecastData.listFiltered[0];
   var date = new Date(weatherChars.dt_txt); 
   var icon = `https://openweathermap.org/img/wn/${
     weatherChars.weather[0]["icon"]
   }@2x.png`;
 
+  // concatenate data
   document.getElementById("city-title-current").innerHTML = forecastData.city.name + " (" + date.toLocaleDateString("en-US") + ")";
-
   document.getElementById("city-temp-current").innerHTML = "temp: " + weatherChars.main.temp + " <sup>°F</sup> ";
-
   document.getElementById("city-wind-current").innerHTML = "wind: " + weatherChars.wind.speed + " MPH";
-  
   document.getElementById("city-humidity-current").innerHTML = "humidity: " + weatherChars.main.humidity + "%";
-  
   document.getElementById("city-icon-current").src= icon;
   
- // UV index needs to be done still!! 
+ // UV index not able to be done due to incorrect API; to be done still!! 
  //document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
-
 }
 
 const displayForecastFiveDay = function(forecastData) {
@@ -92,16 +89,12 @@ const displayForecastFiveDay = function(forecastData) {
   
     // use i to refer to index to streamline code
   document.getElementById("city-date-" + i).innerHTML = date.toLocaleDateString("en-US");
-
   document.getElementById("city-temp-" + i).innerHTML = "temp: " + weatherChars.main.temp + " <sup>°F</sup> ";
-
-  document.getElementById("city-wind-" + i).innerHTML = "wind: " + weatherChars.wind.speed + " MPH";
-  
+  document.getElementById("city-wind-" + i).innerHTML = "wind: " + weatherChars.wind.speed + " MPH"; 
   document.getElementById("city-humidity-" + i).innerHTML = "humidity: " + weatherChars.main.humidity + "%";
-
   document.getElementById("city-icon-" + i).src= icon;
 
-  // UV index needs to be done still!! 
+  // UV index not able to be done due to incorrect API; to be done still!!
  // document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
 
   }
