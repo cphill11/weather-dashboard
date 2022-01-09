@@ -12,6 +12,12 @@ form.addEventListener("submit", e => {
   e.preventDefault();
   const inputVal = input.value||"north royalton";
   const apiKey = "5fdc5c82d91fcc6b7408351d973910b5";
+
+  // use https://openweathermap.org/api/one-call-api     will need to rebuild, use lon & latitude
+
+  //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}, create new branch to work out API for UV index; also add endpoint that turns city name into lon & lat
+  // https://openweathermap.org/api/geocoding-api
+
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${apiKey}&units=imperial`;
   const encoded = encodeURI(url);
   console.log(url);
@@ -23,7 +29,7 @@ form.addEventListener("submit", e => {
       // do stuff w/ data
       console.log(data);
 
-      // if the cod key is not 200, input is invalid for search
+      // if the code key is not 200, input is invalid for search
       if(data.cod !== null && data.cod !== '200'){
         //earch error
         window.alert(inputVal + ' is not a real city... please select a valid city');
@@ -67,7 +73,8 @@ const displayForecastCurrentDay = function(forecastData) {
   
   document.getElementById("city-icon-current").src= icon;
   
- // document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
+ // UV index needs to be done still!! 
+ //document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
 
 }
 
@@ -94,6 +101,7 @@ const displayForecastFiveDay = function(forecastData) {
 
   document.getElementById("city-icon-" + i).src= icon;
 
+  // UV index needs to be done still!! 
  // document.getElementById("city-uv-index-current").innerHTML = "uv-index" + weatherChars.main.uvindex //
 
   }

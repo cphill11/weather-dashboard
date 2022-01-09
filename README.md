@@ -3,9 +3,7 @@
 ## Purpose
 This is an interactive weather application that allows a user to retrieve weather data for multiple cities.
 
-The dashboard uses form inputs to present a user with current and future conditions for that city, with that data then added to the search history.  Review of current weather conditions for a city presents the city name, the date, an icon representing the weather conditions, the temperatrure, the humidity, the wind speed, and the UV index.
-
-When the UV index is reviewed, the user is given a color indicator of whether the conditions are favorable, moderate, or severe.
+The dashboard uses form inputs to present a user with current and future conditions for that city, with that data then added to the search history.  Review of current weather conditions for a city presents the city name, the date, an icon representing the weather conditions, the temperatrure, the humidity, the wind speed, but not the UV index as the wrong API was used.
 
 When the future conditions for a city are reviewed, a 5-day forecase displays the date, an icon represening the weather condition, the temperature, the wind speed, and the humidity.
 
