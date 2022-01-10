@@ -20,14 +20,11 @@ form.addEventListener("submit", e => {
 
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${apiKey}&units=imperial`;
   const encoded = encodeURI(url);
-  console.log(url);
-  console.log(encoded);
  
   //because the service returns in 3 hour increments, we need to divide result by 5 to get the first value for each day - adjusted to display for 12pm
   const dayFilter = [5,13,21,29,37];
   fetch(encoded).then(response => response.json()).then(data => {
       // do stuff w/ data
-      console.log(data);
 
       // if the code key is not 200, input is invalid for search
       if(data.cod !== null && data.cod !== '200'){
@@ -37,7 +34,7 @@ form.addEventListener("submit", e => {
         return;
       }
       // clears search box of input value
-    input.value = "";
+     input.value = "";
 
     const filteredDataForStorage = [];
       dayFilter.forEach(filter => filteredDataForStorage.push(data.list[filter]));

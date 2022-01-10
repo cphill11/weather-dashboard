@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- bootstrap link for if you want to use bootstrap -->
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-            
-        <!-- make sure the GoogleFonts link come before the css link if you want to use fonts-->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
-
-        <!-- add the CDNS bootstrap link for icons before the css link if you want to use icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"/>
-
-        <!-- add the style sheet here -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
-
-        <!-- regular css link goes last -->
         <link rel="stylesheet" href="./assets/css/style.css">
-
 
     <title>Weather Dashboard</title>
 </head>
@@ -26,25 +16,21 @@
 <body class="flex-column min-100-vh">
     <header class="hero" class="container-fluid">
         <h1 class="app-title">Weather Dashboard</h1>
-        <!-- Weather Dashboard heading here needs to have fade --> 
     </header>
     
     <main class="flex-row justify-space-between">
         <div class="col-12 col-md-4">
-          <div class="card">
-            <h1 class="card-header">Search for a City</h1>
-            <form id="user-form" class="card-body">
-                <input name="city" id="city" type="text" autofocus="true" class="form-input" />
-              <button type="submit" class="btn">Search</button>
-            </form>
-          </div>
+            <div class="card">
+                <h1 class="card-header">Search for a City</h1>
+                <form id="user-form" class="card-body">
+                    <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
 
-            <!-- recent search results will show in this spot-->
             <div class="card" id="recent-searches">
             </div><br><br>
         </div>
-
-    <!-- right side is 3/4 of page, divided into one large block, with 5 smaller blocks below it-->
       
         <div class="col-12 col-md-8">
             <section class="ajax-section">
@@ -71,7 +57,7 @@
                     </div>
             </div>
             <div class="card">
-                <!-- break into 5 separate sections -->
+
                 <h3 class="card-header">5-Day Forecast:</h3>
                 
                 <div class="container">
@@ -153,11 +139,8 @@
         </div> 
                     </ul>
                 </div>
-            </section>
-      
-             
+            </section>           
     </main>
-
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
