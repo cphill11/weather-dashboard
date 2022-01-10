@@ -31,7 +31,7 @@ form.addEventListener("submit", e => {
 
       // if the code key is not 200, input is invalid for search
       if(data.cod !== null && data.cod !== '200'){
-        //earch error
+        //search error
         window.alert(inputVal + ' is not a real city... please select a valid city');
         Promise.resolve();
         return;

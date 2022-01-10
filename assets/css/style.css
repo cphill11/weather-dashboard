@@ -33,7 +33,11 @@ main {
   margin: 20px auto;
   width: 100%;
 }
-  
+
+#recent-searches {
+  font-size: 30px;
+  font-style: italic;
+}
 /* AJAX portions */
   .ajax-section .city {
     position: relative;
@@ -99,7 +103,7 @@ main {
   color: var(--primary);
   border: none;
   outline: none;
-  background-color: var(--light-dark);
+  background: linear-gradient(to right, rgb(111, 134, 227), rgb(82, 59, 131));
   box-shadow: 3px 3px var(--dark);
   transform: translate(-1px, -1px);
 }
@@ -141,7 +145,7 @@ main {
 /* hero styling */
 .hero {
   padding: 3% 4%;
-  background-color: var(--dark);
+  background: linear-gradient(to right, rgb(54, 79, 177), rgb(39, 13, 99));
   color: var(--primary);
 }
  
@@ -151,8 +155,7 @@ main {
   padding: 0 10px;
   text-align:center;
 }
-  
- 
+   
 /* icon styles ??? KEEP????   
   .icon-danger {
     color: rgb(255, 70, 70);
@@ -172,7 +175,7 @@ main {
   
 .card-header {
   color: var(--primary);
-  background-color: var(--dark);
+  background: linear-gradient(to bottom right, rgb(54, 79, 177), rgb(39, 13, 99));
   padding: 2.5%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
   text-align: center;
