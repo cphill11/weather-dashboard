@@ -13,7 +13,6 @@ Clicking on a city in search history returns the user to the current and future 
 ## Built With
 * HTML
 * CSS
-* jQuery
 * Bootstrap
 
 ## Website
