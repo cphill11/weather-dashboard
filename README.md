@@ -18,6 +18,8 @@ Clicking on a city in search history returns the user to the current and future 
 ## Website
 https://cphill11.github.io/weather-dashboard/
 
+https://github.com/cphill11/weather-dashboard.git
+
 
 ## Image
 ![Screenshot](/assets/images/screenshot.png)
